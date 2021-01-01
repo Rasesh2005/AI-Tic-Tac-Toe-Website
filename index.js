@@ -89,14 +89,14 @@ const addPlayerMove = e => {
 
 const addComputerMove = () => {
     if (!board_full) {
-        selected=computeMove(play_board)[1]
+        selected = computeMoveAlphaBeta(play_board)[1]
         play_board[selected] = computer;
         game_loop();
     }
 };
 
 // Artificial Intelligence based MiniMax Algorithm
-const computeMove = (play_board, depth = 0, isComputer = true) => {
+const computeMoveMiniMax = (play_board, depth = 0, isComputer = true) => {
     let res = check_match()
     let bestScore;
     let bestMove;
@@ -108,48 +108,117 @@ const computeMove = (play_board, depth = 0, isComputer = true) => {
         return [10 - depth, null]
     }
     check_board_complete();
-    if(board_full){
-        return [0,null]
+    if (board_full) {
+        return [0, null]
     }
     else {
         if (isComputer) {
-            bestScore=-9
+            bestScore = -9
             possibleMoves = []
-            for(i=0;i<play_board.length;i++){
-                if(play_board[i]==""){
+            for (i = 0; i < play_board.length; i++) {
+                if (play_board[i] == "") {
                     possibleMoves.push(i);
                 }
             }
-            // console.log(possibleMoves)
-            possibleMoves.forEach((move)=>{
-                play_board[move]=computer;
-                score=computeMove(play_board,depth+1,false)[0]
-                if(score>bestScore){
-                    bestScore=score;
-                    bestMove=move;
+            possibleMoves.forEach((move) => {
+                play_board[move] = computer;
+                score = computeMoveMiniMax(play_board, depth + 1, false)[0]
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestMove = move;
                 }
-                play_board[move]="";
+                play_board[move] = "";
             });
-            return [bestScore,bestMove]
-        }else{
-            bestScore=9
+            return [bestScore, bestMove]
+        } else {
+            bestScore = 9
             possibleMoves = []
-           for( i=0;i<play_board.length;i++){
-            if(play_board[i]==""){
-                possibleMoves.push(i);
-            }
-           }
-            
-            possibleMoves.forEach((move)=>{
-                play_board[move]=player;
-                score=computeMove(play_board,depth+1,true)[0]
-                if(score<bestScore){
-                    bestScore=score;
-                    bestMove=move;
+            for (i = 0; i < play_board.length; i++) {
+                if (play_board[i] == "") {
+                    possibleMoves.push(i);
                 }
-                play_board[move]="";
+            }
+
+            possibleMoves.forEach((move) => {
+                play_board[move] = player;
+                score = computeMoveMiniMax(play_board, depth + 1, true)[0]
+                if (score < bestScore) {
+                    bestScore = score;
+                    bestMove = move;
+                }
+                play_board[move] = "";
             })
-            return [bestScore,bestMove]
+            return [bestScore, bestMove]
+        }
+    }
+}
+// Artificial Intelligence based Alpha-Beta-pruning Algorithm
+const computeMoveAlphaBeta = (play_board, depth = 0, alpha = -Infinity, beta = +Infinity, isComputer = true) => {
+    let res = check_match()
+    let bestScore;
+    let bestMove;
+    let possibleMoves
+    if (res == player) {
+        return [-10 + depth, null]
+    }
+    else if (res == computer) {
+        return [10 - depth, null]
+    }
+    check_board_complete();
+    if (board_full) {
+        return [0, null]
+    }
+    else {
+        if (isComputer) {
+            bestScore = -9
+            possibleMoves = []
+            for (i = 0; i < play_board.length; i++) {
+                if (play_board[i] == "") {
+                    possibleMoves.push(i);
+                }
+            }
+            possibleMoves.forEach((move) => {
+                play_board[move] = computer;
+                score = computeMoveAlphaBeta(play_board, depth + 1,alpha,beta, false)[0]
+                // alpha = max(alpha, score)
+                if(score>alpha){
+                    alpha=score;
+                }
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestMove = move;
+                }
+                play_board[move] = "";
+                if (beta < alpha) {
+                    return 0,0;
+                }
+            });
+            return [bestScore, bestMove]
+        } else {
+            bestScore = 9
+            possibleMoves = []
+            for (i = 0; i < play_board.length; i++) {
+                if (play_board[i] == "") {
+                    possibleMoves.push(i);
+                }
+            }
+
+            possibleMoves.forEach((move) => {
+                play_board[move] = player;
+                score = computeMoveAlphaBeta(play_board, depth + 1,alpha,beta ,true)[0]
+                if(score<beta){
+                    beta=score
+                }
+                if (score < bestScore) {
+                    bestScore = score;
+                    bestMove = move;
+                }
+                play_board[move] = "";
+                if(beta<=alpha){
+                    return 0,0;
+                }
+            })
+            return [bestScore, bestMove]
         }
     }
 }
