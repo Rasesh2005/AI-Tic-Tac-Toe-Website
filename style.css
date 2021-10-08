@@ -90,3 +90,7 @@ button {
   background: none;
   transition: all 0.2s ease-in-out;
 }
+.dark{
+    background-color: #222;
+    color: #e6e6e6;
+}
