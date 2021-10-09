@@ -235,3 +235,8 @@ const reset_board = () => {
 
 //initial render
 render_board();
+//dark mode
+const myFunction = ()=> {
+    var element = document.body;
+    element.classList.toggle("dark");
+}
