@@ -94,3 +94,9 @@ button {
     background-color: #222;
     color: #e6e6e6;
 }
+
+/* winner colour */
+
+.win-block{
+  background:  green;
+}
