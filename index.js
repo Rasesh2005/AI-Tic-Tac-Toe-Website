@@ -32,38 +32,36 @@ const check_line = (a, b, c) => {
             play_board[b] == play_board[c] &&
             (play_board[a] == player || play_board[a] == computer)
         );
-    if(res){
-        var winLine=[a,b,c];    //marking the winning blocks
-        win_line(winLine);
-    }
+  
     return res;
 };
 
 const check_match = () => {
     for (i = 0; i < 9; i += 3) {
         if (check_line(i, i + 1, i + 2)) {
-            return play_board[i];
+            return [play_board[i],[i, i + 1, i + 2]];
         }
     }
     for (i = 0; i < 3; i++) {
         if (check_line(i, i + 3, i + 6)) {
-            return play_board[i];
+            return [play_board[i],[i, i + 3, i + 6]];
         }
     }
     if (check_line(0, 4, 8)) {
-        return play_board[0];
+        return [play_board[0],[0, 4, 8]];
     }
     if (check_line(2, 4, 6)) {
-        return play_board[2];
+        return [play_board[2],[2, 4, 6]];
     }
-    return "";
+    return ["",[-1,-1,-1]];
 };
 
 const check_for_winner = () => {
     let res = check_match()
-    if (res == player) {
+    if (res[0] == player) {
         winner.innerText = "Player Won!!";
         winner.classList.add("playerWin");
+        win_line(res[1]);
         board_full = true
          // Confetti Code here
         var confettiElement = document.getElementById('my-canvas');
@@ -71,9 +69,10 @@ const check_for_winner = () => {
         var confetti = new ConfettiGenerator(confettiSettings);
         confetti.render();
         setTimeout(() => {confetti.clear()}, 3000); // clearing after 3
-    } else if (res == computer) {
+    } else if (res[0] == computer) {
         winner.innerText = "Computer Won";
         winner.classList.add("computerWin");
+        win_line(res[1]);
         board_full = true
     } else if (board_full) {
         winner.innerText = "It's a Draw!";
@@ -119,10 +118,10 @@ const computeMoveMiniMax = (play_board, depth = 0, isComputer = true) => {
     let bestScore;
     let bestMove;
     let possibleMoves
-    if (res == player) {
+    if (res[0] == player) {
         return [-10 + depth, null]
     }
-    else if (res == computer) {
+    else if (res[0] == computer) {
         return [10 - depth, null]
     }
     check_board_complete();
@@ -176,10 +175,10 @@ const computeMoveAlphaBeta = (play_board, depth = 0, alpha = -Infinity, beta = +
     let bestScore;
     let bestMove;
     let possibleMoves
-    if (res == player) {
+    if (res[0] == player) {
         return [-10 + depth, null]
     }
-    else if (res == computer) {
+    else if (res[0] == computer) {
         return [10 - depth, null]
     }
     check_board_complete();
