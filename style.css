@@ -10,16 +10,17 @@
 .play-area>.block{
     font-family: "Permanent Marker", Arial, Helvetica, sans-serif;
 }
-
 /* container position */
-.container{
+.containerMain{
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
     align-items: center;
+    justify-content: center;
 }
 
 #block_0,
@@ -50,17 +51,14 @@
 }
 .play-area {
   display: grid;
-  width: 80vw;
-  max-width: 450px;
-  height: 80vw;
-  max-height: 450px;
+  width: 70vmin;
+  height: 70vmin;
   margin: 10px;
-  grid-template-columns: auto auto auto;
+  grid-template-columns:1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
 }
 .block {
   display: flex;
-  width: 150px;
-  height: 150px;
   align-items: center;
   justify-content: center;
   font-size: 6rem;
