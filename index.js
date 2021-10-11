@@ -18,13 +18,25 @@ check_board_complete = () => {
     board_full = flag;
 };
 
+// helper function used in check_line() to mark the winning blocks
+const win_line = (winLine) => {
+    for(i=0;i<3;i++){
+        document.querySelector(`#block_${winLine[i]}`).classList.add("win-block");
+    }
+}
+
 // helper function used in check_match() functon
 const check_line = (a, b, c) => {
-    return (
-        play_board[a] == play_board[b] &&
-        play_board[b] == play_board[c] &&
-        (play_board[a] == player || play_board[a] == computer)
-    );
+    var res  = (
+            play_board[a] == play_board[b] &&
+            play_board[b] == play_board[c] &&
+            (play_board[a] == player || play_board[a] == computer)
+        );
+    if(res){
+        var winLine=[a,b,c];    //marking the winning blocks
+        win_line(winLine);
+    }
+    return res;
 };
 
 const check_match = () => {
