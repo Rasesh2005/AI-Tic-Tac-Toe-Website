@@ -8,21 +8,22 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js">
   </script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
     integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    <title>Tic-Tac-Toe</title>
+  <title>Tic-Tac-Toe</title>
   <!-- Applying CSS Properties -->
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <div class="container">
-    <!-- REST OF THE CODE -->
+
+  <div class="containerMain">
     <h1>Tic-Tac-Toe</h1>
+    <!-- REST OF THE CODE -->
     <div class="play-area">
       <div id="block_0" class="block"></div>
       <div id="block_1" class="block"></div>
@@ -34,20 +35,22 @@
       <div id="block_7" class="block"></div>
       <div id="block_8" class="block"></div>
     </div>
-  <!-- results -->
-    <h2 id="winner"></h2>
-    <button onclick="reset_board()">RESET BOARD</button>
-    <div class=onoff>
+    <!-- results -->
+    <div class="onoff">
       <h4>Dark Mode</h4>
       <label class="switch">
         <input onclick="myFunction()" type="checkbox">
         <span class="slider round"></span>
       </label>
-      </div>
+    </div>
+    <h2 id="winner"></h2>
+    <button onclick="reset_board()">RESET BOARD</button>
   </div>
-
-
   
+
+
+
+
   <!-- Javascript files -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <script src="index.js" type="text/Javascript"></script>
