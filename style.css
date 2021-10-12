@@ -63,24 +63,24 @@
   justify-content: center;
   font-size: 6rem;
   font-weight: bold;
-  border: 3px solid black;
+  border: 3px solid rgb(240, 8, 8);
   transition: background 0.2s ease-in-out;
 }
 
 .block:hover {
   cursor: pointer;
-  background: black;
-  color: white;
+  background: rgb(67, 221, 28);
+  color: rgb(20, 24, 236);
 }
 
 button:hover {
   cursor: pointer;
-  background: black;
+  background: rgb(15, 226, 50);
   color: white;
 }
 button {
   outline: none;
-  border: 4px solid black;
+  border: 4px solid rgb(82, 57, 173);
   border-radius: 7px;
   padding: 10px 20px;
   font-weight: bold;
@@ -90,7 +90,7 @@ button {
 }
 .dark{
     background-color: #222;
-    color: #e6e6e6;
+    color: yellow;
 }
 
 /* winner colour */
@@ -100,18 +100,18 @@ button {
 }
 
 .dark .block{
-  border: 3px solid #e6e6e6;
+  border: 3px solid #e2e618;
 }
 .dark .block:hover {
   cursor: pointer;
-  background: #e6e6e6;
+  background: #d334d8;
   color: black;
 }
 .dark button{
-  border: 4px solid #e6e6e6;
+  border: 4px solid #15c4f0;
 }
 .dark button:hover{
-  background: #e6e6e6;
+  background: #14e765;
   color: black;
 }
 /* Switch */
